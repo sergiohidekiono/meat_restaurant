@@ -16,20 +16,21 @@
             <img class="box-img-detail" [src]="restaurant?.imagePath" />
           </div>
           <dl class="col-sm-9 col-xs-12">
-            <dt>Categoria</dt>
+            <dt>Category</dt>
             <dd>{{restaurant?.category}}</dd>
-            <dt>Quem somos</dt>
+            <dt>About us</dt>
             <dd>{{restaurant?.about}}</dd>
-            <dt>Horários</dt>
+            <dt>Hours of operation</dt>
             <dd>{{restaurant?.hours}}</dd>
           </dl>
         </div>
         <!-- /.box-body -->
         <div class="box-footer detail-footer">
-          <a class="pull-left detail-active" href="detail-restaurant.html">
+          <a class="pull-left detail-active" routerLinkActive="detail-active" [routerLink]="['menu']">
             Menu
           </a>
-          <a class="pull-right" href="detail-restaurant-reviews.html">
+          <!-- don't put /reviews, because if you put / it's represents that'll get the route starting from root and not the relative route -->
+          <a class="pull-right" routerLinkActive="detail-active" [routerLink]="['reviews']">
             Avaliações
           </a>
         </div>
@@ -38,6 +39,7 @@
     <!-- /.col-xs-12 -->
   </div>
   <div class="row">
-    <mt-menu></mt-menu>
+    <!-- this path have the children routes available to indicate the path for each click defined by the routes's children -->
+    <router-outlet></router-outlet>
   </div>
 </section>

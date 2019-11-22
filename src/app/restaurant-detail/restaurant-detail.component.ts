@@ -18,7 +18,7 @@ export class RestaurantDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.restaurantsService.restaurantById(this.route.snapshot.params['id'])
+    this.restaurantsService.restaurantById(this.route.snapshot.params['id']) // catching the parameter of "id", it'll be used once changing the route to another route
       .subscribe((retornoAPI) => {
         this.restaurant = retornoAPI
       })
