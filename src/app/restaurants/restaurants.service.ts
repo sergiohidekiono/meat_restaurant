@@ -32,7 +32,7 @@ export class RestaurantService {
       .catch(ErrorHandler.handleError)
   }
 
-  menuOfrestaurant(id: string): Observable<MenuItem[]> {
+  menuOfRestaurant(id: string): Observable<MenuItem[]> {
     return this.http.get(`${MEAT_API}/restaurants/${id}/menu`)
       .map(response => response.json())
       .catch(ErrorHandler.handleError)
