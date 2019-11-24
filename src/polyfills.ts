@@ -18,3 +18,5 @@ import 'core-js/es6/reflect';
 import 'core-js/es7/reflect';
 import 'zone.js/dist/zone';
 
+import 'intl' // include the package
+import 'intl/locale-data/jsonp/pt-BR.js' // include the script
