@@ -12,9 +12,21 @@ export class ShoppingCartService {
     let foundItem = this.items.find(myItem => myItem.menuItem.id === item.id)
 
     if (foundItem) { // if exist a quantity already it'll add +1
-      foundItem.quantity = foundItem.quantity + 1
+      this.increaseQty(foundItem)
     } else { // else add the quantity to 1
       this.items.push(new CartItem(item))
+    }
+  }
+
+  increaseQty(item: CartItem) {
+    item.quantity = item.quantity + 1
+  }
+
+  decreaseQty(item: CartItem) {
+    item.quantity = item.quantity - 1
+
+    if (item.quantity === 0) {
+      this.removeItem(item)
     }
   }
 
