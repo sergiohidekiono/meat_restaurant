@@ -4,7 +4,7 @@
 <section class="content">
   <section class="invoice">
 
-    <form #form="ngForm" novalidade>
+    <form [formGroup]="orderForm" novalidade>
       <div class="row">
         <div class="col-xs-12">
           <h2 class="page-header">
@@ -13,25 +13,46 @@
         </div>
       </div>
 
-      <div class="row invoice-info">
+      <div class="row">
+        <div class="col-xs-12">
+          <p class="lead">Seus dados:</p>
+        </div>
+        <div class="col-sm-6 col-xs-12">
+          <mt-input-container errorMessage="Field required with 5 character" label="Name">
+            <input class="form-control" formControlName="name" placeholder="Name" autocomplete="off">
+          </mt-input-container>
+        </div>
+        <div class="col-sm-3 col-xs-6">
+          <mt-input-container errorMessage="E-mail invalid" label="E-mail">
+            <input type="text" class="form-control" formControlName="email" placeholder="E-mail" autocomplete="off">
+          </mt-input-container>
+        </div>
+        <div class="col-sm-3 col-xs-6">
+          <mt-input-container errorMessage="Confirm e-mail invalid" label="Confirm e-mail">
+            <input type="text" class="form-control" formControlName="emailConfirmation" placeholder="Confirm e-mail"
+              autocomplete="off">
+          </mt-input-container>
+        </div>
+      </div>
+
+      <div class="row">
         <div class="col-xs-12">
           <p class="lead">Endereço de Entrega:</p>
         </div>
         <div class="col-sm-6 col-xs-12">
           <mt-input-container errorMessage="Field is required with 5 character" label="Address">
-            <input class="form-control" name="address" ngModel required minlength="5" placeholder="Address"
-              autocomplete="off">
+            <input class="form-control" formControlName="address" placeholder="Address" autocomplete="off">
           </mt-input-container>
         </div>
         <div class="col-sm-2 col-xs-6">
           <mt-input-container errorMessage="Only number is required">
-            <input type="text" class="form-control" name="number" pattern="^[0-9]*$" required ngModel id="inputSuccess"
-              placeholder="Número" autocomplete="off">
+            <input type="text" class="form-control" formControlName="number" id="inputSuccess" placeholder="Número"
+              autocomplete="off">
           </mt-input-container>
         </div>
         <div class="col-sm-4 col-xs-6">
           <mt-input-container>
-            <input type="text" class="form-control" name="optionalAddress" ngModel id="inputSuccess"
+            <input type="text" class="form-control" formControlName="optionalAddress" id="inputSuccess"
               placeholder="Complemento">
           </mt-input-container>
         </div>
@@ -55,7 +76,7 @@
         <div class="col-sm-6 col-xs-12">
           <p class="lead">Formas de Pagamento:</p>
           <div class="form-group">
-            <mt-radio [options]="paymentOptions" name="paymentOption" ngModel required></mt-radio>
+            <mt-radio [options]="paymentOptions" formControlName="paymentOption"></mt-radio>
           </div>
         </div>
         <!-- /.col -->
@@ -71,8 +92,8 @@
 
     <div class="row">
       <div class="col-xs-12">
-        <button class="btn btn-success pull-right" (click)="checkOrder(form.value)"
-          [disabled]="!form.valid || cartItems().length === 0">
+        <button class="btn btn-success pull-right" (click)="checkOrder(orderForm.value)"
+          [disabled]="!orderForm.valid || cartItems().length === 0">
           <i class="fa fa-credit-card"></i> Concluir Pedido
         </button>
       </div>
