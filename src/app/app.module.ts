@@ -3,6 +3,8 @@ import { NgModule, LOCALE_ID } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { ROUTES } from './app.routes';
 
 import { AppComponent } from './app.component';
@@ -34,6 +36,7 @@ import { SharedModule } from './shared/shared.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule, // ready for use the animations
     HttpModule,
     SharedModule.forRoot(), // .forRoot() used to import the module + providers(services)
     RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules }), // preloading is used to load the module in background

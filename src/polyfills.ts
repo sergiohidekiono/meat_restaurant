@@ -20,3 +20,5 @@ import 'zone.js/dist/zone';
 
 import 'intl' // include the package
 import 'intl/locale-data/jsonp/pt-BR.js' // include the script
+
+import 'web-animations-js/web-animations.min.js' // import the polyfills animations
