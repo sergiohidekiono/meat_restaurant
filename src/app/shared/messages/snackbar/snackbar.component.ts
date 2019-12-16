@@ -1,4 +1,7 @@
 import { Component, OnInit, trigger, state, style, transition, animate } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/timer'; // import to use the timer
+import { NotificationService } from '../notification.service';
 
 @Component({
   selector: 'mt-snackbar',
@@ -12,7 +15,7 @@ import { Component, OnInit, trigger, state, style, transition, animate } from '@
       })),
       state('visible', style({
         opacity: 1, // can pass the value
-        bottom: '30px' // or string in pixel
+        bottom: '50px' // or string in pixel
       })),
       transition('hidden => visible', animate('500ms 0s ease-in')), // duration 500ms(time) 0s(duration) ease-in(speed)
       transition('visible => hidden', animate('500ms 0s ease-out'))
@@ -25,9 +28,13 @@ export class SnackbarComponent implements OnInit {
 
   snackVisibility: string = 'hidden'
 
-  constructor() { }
+  constructor(private notificationService: NotificationService) { }
 
   ngOnInit() {
+    this.notificationService.notifier.subscribe(message => {
+      this.message = message // notify the message
+      this.snackVisibility = 'visible' // showing the snackbar with message
+      Observable.timer(3000).subscribe(timer => this.snackVisibility = 'hidden') // when the timer is already done the snackbar will hidden
+    })
   }
-
 }
