@@ -1,7 +1,8 @@
 import { Component, OnInit, trigger, state, style, transition, animate } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/timer'; // import to use the timer
 import { NotificationService } from '../notification.service';
+
+import { tap, switchMap } from 'rxjs/operators' // must install de package npm install --save rxjs@5.5.2
+import { timer } from 'rxjs/observable/timer';
 
 @Component({
   selector: 'mt-snackbar',
@@ -24,17 +25,21 @@ import { NotificationService } from '../notification.service';
 })
 export class SnackbarComponent implements OnInit {
 
-  message: string = 'Hello there!'
+  message: any
 
   snackVisibility: string = 'hidden'
 
   constructor(private notificationService: NotificationService) { }
 
   ngOnInit() {
-    this.notificationService.notifier.subscribe(message => {
-      this.message = message // notify the message
-      this.snackVisibility = 'visible' // showing the snackbar with message
-      Observable.timer(3000).subscribe(timer => this.snackVisibility = 'hidden') // when the timer is already done the snackbar will hidden
-    })
+    this.notificationService.notifier
+      .pipe(
+        tap(message => {
+          this.message = message
+          this.snackVisibility = 'visible'
+        }),
+        switchMap(() => timer(3000)) // switchMap don't compete with each other because it's make an subscribe and unsubscribe when detect a new subscribe
+      )
+      .subscribe(() => { this.snackVisibility = 'hidden' })
   }
 }
