@@ -234,7 +234,7 @@ body {
   font-weight: bold;
 }
 
-/*rstaurant detail*/
+/*restaurant detail*/
 
 .detail-footer{
   padding:0px
@@ -260,4 +260,21 @@ body {
 
 .has-error-block {
   color: #dd4b39;
+}
+
+/* serach bar */
+
+.search-link{
+  cursor: pointer;
+  color: #555;
+}
+
+.search-link:hover{
+  cursor: pointer;
+  color: #dd4b39;
+}
+
+.search-bar{
+  opacity: 0;
+  max-height: 0px;
 }
