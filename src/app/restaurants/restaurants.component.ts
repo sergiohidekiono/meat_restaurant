@@ -5,6 +5,9 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/from';
+import { Observable } from 'rxjs/Observable';
 
 import { Restaurant } from './restaurant/restaurant.model';
 import { RestaurantService } from './restaurants.service';
@@ -54,7 +57,10 @@ export class RestaurantsComponent implements OnInit {
       .debounceTime(800)
       .distinctUntilChanged() // don't repeat the same search twice times
       // .do(searchTerm => console.log(`q=${searchTerm}`))
-      .switchMap(searchTerm => this.restaurantService.restaurants(searchTerm)) // switchMap will take the last value instead of each value it's consume alot of data process
+      .switchMap(searchTerm =>
+        this.restaurantService.restaurants(searchTerm)// switchMap will take the last value instead of each value it's consume alot of data process
+          .catch(error => Observable.from([])) // from is used to create an string from an array
+      )
       .subscribe(restaurants => this.restaurants = restaurants) // get the values
 
     this.restaurantService.restaurants()
