@@ -20,7 +20,6 @@ import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component'
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { SharedModule } from './shared/shared.module';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -44,7 +43,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     SharedModule.forRoot(), // .forRoot() used to import the module + providers(services)
     RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules }), // preloading is used to load the module in background
   ],
-  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }, { provide: LOCALE_ID, useValue: 'pt-BR' }], // { provide: LOCALE_ID, useValue: 'pt-BR' } change the locale currency
+  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }], // { provide: LOCALE_ID, useValue: 'pt-BR' } change the locale currency
   bootstrap: [AppComponent]
 })
 export class AppModule { }
