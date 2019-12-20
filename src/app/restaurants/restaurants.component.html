@@ -1,6 +1,11 @@
 <section class="content-header">
   <h1>All restaurants
-    <a (click)="toggleSearch()" class="search-link pull-right"><i class="fa fa-search"></i></a>
+    <a (click)="toggleSearch()" class="search-link pull-right">
+      <span *ngIf="inputSearch.value">
+        <small>"{{inputSearch.value}}"</small>
+      </span>
+      <i class="fa fa-search"></i>
+    </a>
   </h1>
 
   <!-- search bar -->
@@ -8,7 +13,8 @@
     <div class="col-xs-12 search-bar" [@toggleSearch]="searchBarState">
       <form [formGroup]="searchForm">
         <div class="form-group">
-          <input type="text" formControlName="searchControl" class="form-control" placeholder="Looking for?">
+          <input type="text" #inputSearch formControlName="searchControl" class="form-control"
+            placeholder="Looking for?">
         </div>
       </form>
     </div>
